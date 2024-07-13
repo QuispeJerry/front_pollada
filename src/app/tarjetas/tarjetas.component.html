@@ -1,0 +1,36 @@
+<div class="header">
+    <input type="number" [(ngModel)]="filtroNumero" placeholder="Buscar por número de tarjeta" />
+    <div class="botones_filtro">
+        <button (click)="filtroRol = null">Mostrar todas</button>
+        <button class="boton1" (click)="filtroRol = 'recibido pagado'">Recibido Pagado</button>
+        <button class="boton2" (click)="filtroRol = 'recibido no pagado'">Recibido No Pagado</button>
+        <button class="boton3" (click)="filtroRol = 'no recibido no pagado'">No Recibido No Pagado</button>
+        <button class="boton4" (click)="filtroRol = 'no recibido pagado'">No Recibido Pagado</button>
+    </div>
+</div>
+
+<br>
+<div class="tarjetas">
+    <div *ngFor="let tarjeta of tarjetasFiltradas()" [ngClass]="getTarjetaClass(tarjeta.rol)"
+        (click)="abrirModal(tarjeta)">
+        <div class="estado">{{ tarjeta.rol }}</div>
+        <div class="numero">{{ tarjeta.numero }}</div>
+    </div>
+</div>
+
+<!-- Ventana Modal -->
+<div *ngIf="modalAbierto && tarjetaSeleccionada" class="modal">
+    <div class="modal-contenido">
+        <h2>actualizar estado</h2>
+        <select [(ngModel)]="tarjetaSeleccionada.rol">
+            <option value="recibido pagado">Recibido Pagado</option>
+            <option value="recibido no pagado">Recibido No Pagado</option>
+            <option value="no recibido no pagado">No Recibido No Pagado</option>
+            <option value="no recibido pagado">No Recibido Pagado</option>
+        </select>
+        <button class="boton_guardar" (click)="guardarCambios()">Guardar Cambios</button>
+        <button class="boton_cancelar" (click)="cerrarModal()">Cerrar</button>
+    </div>
+</div>
+
+<br>
