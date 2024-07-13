@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.columna1, .columna2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.columna1 {
+    background-color: #000000;
+}
+
+.columna2 {
+    background-color: #b43030;
+}
+
+.login{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.inputEmail{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #b43030;
+    font-weight: 500;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.inputPassword{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #b43030;
+    font-weight: 500;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.inputEmail:focus, .inputPassword:focus {
+    outline: none; /* Elimina el contorno predeterminado del navegador */
+    border: 2px solid #ff6b6b; /* Cambia el color y grosor del borde al enfocar */
+    box-shadow: 0 0 5px rgba(255, 107, 107, 0.5); /* Añade un sombreado suave */
+}
+
+.botonLogin{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #b43030;
+    color: #ffffff;
+    font-weight: 500;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login h1{
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #000000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

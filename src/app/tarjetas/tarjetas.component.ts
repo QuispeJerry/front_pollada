@@ -3,6 +3,7 @@ import { Tarjeta } from '../models/tarjeta';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TarjetaService } from '../service/TarjetaService';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-tarjetas',
@@ -18,10 +19,14 @@ export class TarjetasComponent implements OnInit {
   modalAbierto: boolean = false;
   tarjetaSeleccionada: Tarjeta | null = null;
 
-  constructor(private tarjetaService: TarjetaService) { }
+  constructor(private tarjetaService: TarjetaService, private authService: AuthService) { }
 
   ngOnInit() {
     this.cargarTarjetas();
+  }
+
+  logout() {
+    this.authService.logout(); // Llama al método logout del AuthService
   }
 
   cargarTarjetas() {

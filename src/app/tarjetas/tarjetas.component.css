@@ -245,3 +245,24 @@ input {
     color: #ffffff;
     border: 0.5px solid transparent;
 } */
+
+
+.logout-button {
+    background-color: #f44336; /* Color rojo para el botón de logout */
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+
+.logout-button:hover {
+    background-color: #d32f2f;
+}
