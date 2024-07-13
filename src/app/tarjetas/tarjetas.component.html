@@ -1,5 +1,5 @@
 <div class="header">
-    <input type="number" [(ngModel)]="filtroNumero" placeholder="Buscar por número de tarjeta" />
+    <input type="number" [(ngModel)]="filtroNumero" placeholder="Buscar por ID de tarjeta" />
     <div class="botones_filtro">
         <button (click)="filtroRol = null">Mostrar todas</button>
         <button class="boton1" (click)="filtroRol = 'recibido pagado'">Recibido Pagado</button>
@@ -14,14 +14,14 @@
     <div *ngFor="let tarjeta of tarjetasFiltradas()" [ngClass]="getTarjetaClass(tarjeta.rol)"
         (click)="abrirModal(tarjeta)">
         <div class="estado">{{ tarjeta.rol }}</div>
-        <div class="numero">{{ tarjeta.numero }}</div>
+        <div class="numero">{{ tarjeta.id }}</div> <!-- Aquí se muestra el id -->
     </div>
 </div>
 
 <!-- Ventana Modal -->
 <div *ngIf="modalAbierto && tarjetaSeleccionada" class="modal">
     <div class="modal-contenido">
-        <h2>actualizar estado</h2>
+        <h2>Actualizar estado</h2>
         <select [(ngModel)]="tarjetaSeleccionada.rol">
             <option value="recibido pagado">Recibido Pagado</option>
             <option value="recibido no pagado">Recibido No Pagado</option>

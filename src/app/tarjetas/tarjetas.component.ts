@@ -12,14 +12,8 @@ import { TarjetaService } from '../service/TarjetaService';
   styleUrls: ['./tarjetas.component.css']
 })
 export class TarjetasComponent implements OnInit {
-  tarjetas: Tarjeta[] = [
-    { rol: 'recibido pagado', numero: 1 },
-    { rol: 'no recibido no pagado', numero: 2 },
-    // ... (agrega el resto de tarjetas)
-  ];
-
   tarjetas2: Tarjeta[] = [];
-  filtroNumero: number | null = null;
+  filtroNumero: number | null = null; // Aquí se usa el ID
   filtroRol: string | null = null;
   modalAbierto: boolean = false;
   tarjetaSeleccionada: Tarjeta | null = null;
@@ -34,12 +28,17 @@ export class TarjetasComponent implements OnInit {
     this.tarjetaService.getTarjetas().subscribe({
       next: (tarjetas2: Tarjeta[]) => {
         this.tarjetas2 = tarjetas2;
-        console.log('Tarjetas cargadas:', this.tarjetas2); // Mostrar en consola
+        this.ordenarTarjetas(); // Ordenar tarjetas al cargar
+        console.log('Tarjetas cargadas:', this.tarjetas2);
       },
       error: (error) => {
         console.error('Error al cargar tarjetas:', error);
       }
     });
+  }
+
+  ordenarTarjetas() {
+    this.tarjetas2.sort((a, b) => a.id - b.id); // Ordenar por ID
   }
 
   getTarjetaClass(rol: string): string {
@@ -58,8 +57,8 @@ export class TarjetasComponent implements OnInit {
   }
 
   tarjetasFiltradas(): Tarjeta[] {
-    return this.tarjetas.filter(tarjeta => {
-      const numeroCoincide = this.filtroNumero === null || tarjeta.numero === this.filtroNumero;
+    return this.tarjetas2.filter(tarjeta => {
+      const numeroCoincide = this.filtroNumero === null || tarjeta.id === this.filtroNumero; // Comparar con id
       const rolCoincide = this.filtroRol === null || tarjeta.rol === this.filtroRol;
       return numeroCoincide && rolCoincide;
     });
@@ -76,6 +75,17 @@ export class TarjetasComponent implements OnInit {
   }
 
   guardarCambios() {
-    this.modalAbierto = false;
+    if (this.tarjetaSeleccionada) {
+      this.tarjetaService.updateTarjeta(this.tarjetaSeleccionada.id, this.tarjetaSeleccionada).subscribe({
+        next: () => {
+          console.log('Tarjeta actualizada:', this.tarjetaSeleccionada);
+          this.cerrarModal(); // Cerrar modal después de guardar cambios
+          this.cargarTarjetas(); // Recargar tarjetas
+        },
+        error: (error) => {
+          console.error('Error al actualizar tarjeta:', error);
+        }
+      });
+    }
   }
 }
